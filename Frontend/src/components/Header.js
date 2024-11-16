@@ -61,7 +61,7 @@ export default function Header() {
                           alt="Inventory Management System"
                         />
                         <span className="font-bold text-white italic">
-                          Mads International
+                          Fantasy Football
                         </span>
                       </div>
                     </div>
@@ -69,68 +69,7 @@ export default function Header() {
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       {/* Profile dropdown */}
-                      <Menu as="div" className="relative ml-3">
-                        <div>
-                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span className="sr-only">view notifications</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke-width="1.5"
-                              stroke="currentColor"
-                              class="w-6 h-6 text-white"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                              />
-                            </svg>
-                            {notificationCount > 0 && (
-                              <span
-                                className="bg-red-500 text-white rounded-full px-1 py-0.125 text-xxs absolute -top-2 -right-1"
-                                style={{ fontSize: "0.65rem" }} // Adjust the font size as needed
-                              >
-                                {notificationCount}
-                              </span>
-                            )}
-                          </Menu.Button>
-                        </div>
-
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {products.map((product) => {
-                              return product.stock < 11 ? (
-                                <Menu.Item key={product._id}>
-                                  <div className="flex flex-col p-2 border-b border-gray-200">
-                                    <span className="font-semibold text-lg">
-                                      {product.items?.name} -{" "}
-                                      {product.packSize?.packSize}
-                                      {product.items?.units}
-                                    </span>
-                                    <span className="text-gray-500 text-sm">
-                                      {product.city}, {product.area}, Warehouse{" "}
-                                      {product.warehouseNumber}
-                                    </span>
-                                    <span className="text-red-500 text-sm">
-                                      Low stock alert!
-                                    </span>
-                                  </div>
-                                </Menu.Item>
-                              ) : null;
-                            })}
-                          </Menu.Items>
-                        </Transition>
-                      </Menu>
+                      <Menu as="div" className="relative ml-3"></Menu>
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
