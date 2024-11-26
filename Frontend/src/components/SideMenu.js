@@ -18,6 +18,38 @@ function SideMenu() {
             />
             <span className="text-sm font-medium"> Dashboard </span>
           </Link>
+
+          <Link
+            to="/players"
+            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+          >
+            <img alt="players-icon" src={require("../assets/users.png")} />
+            <span className="text-sm font-medium"> Players </span>
+          </Link>
+
+          <Link
+            to="/teams"
+            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+          >
+            <img alt="players-icon" src={require("../assets/users.png")} />
+            <span className="text-sm font-medium"> Teams </span>
+          </Link>
+
+          <Link
+            to="/managers"
+            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+          >
+            <img alt="players-icon" src={require("../assets/users.png")} />
+            <span className="text-sm font-medium"> Managers </span>
+          </Link>
+
+          <Link
+            to="/fantasy"
+            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+          >
+            <img alt="players-icon" src={require("../assets/users.png")} />
+            <span className="text-sm font-medium"> Fantasy </span>
+          </Link>
         </nav>
       </div>
 
@@ -39,10 +71,8 @@ function SideMenu() {
           <div>
             <p className="text-xs">
               <strong className="block font-medium">
-                {localStorageData.firstName + " " + localStorageData.lastName}
+                {localStorageData.user_name}
               </strong>
-
-              <span> {localStorageData.phoneNumber} </span>
             </p>
           </div>
         </div>

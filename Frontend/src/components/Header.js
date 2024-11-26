@@ -29,20 +29,7 @@ export default function Header() {
   const [products, setProducts] = useState([]);
   const [notificationCount, setNotificationCount] = useState(0);
 
-  useEffect(() => {
-    const lowStockProducts = products.filter((product) => product.stock < 11);
-    setNotificationCount(lowStockProducts.length);
-
-    const fetchProductsData = () => {
-      fetch(`${process.env.REACT_APP_URL}/api/product/get/${authContext.user}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setProducts(data);
-        })
-        .catch((err) => console.log(err));
-    };
-    fetchProductsData();
-  }, [authContext.user, products]);
+  useEffect(() => {}, [authContext.user, products]);
 
   return (
     <>

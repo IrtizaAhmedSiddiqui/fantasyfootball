@@ -1,17 +1,16 @@
-import AuthContext from "./AuthContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import AuthContext from "./AuthContext";
 
-function ProtectedWrapper(props) {
-  const auth = useContext(AuthContext);
-  // console.log("====================================");
-  // console.log(auth);
-  // console.log("====================================");
+const ProtectedWrapper = ({ children }) => {
+  const { user } = useContext(AuthContext);
 
-  if (!auth.user) {
-    return <Navigate to="/login" replace />;
+  // If there's no user, redirect to the login page
+  if (!user) {
+    return <Navigate to="/login" />;
   }
 
-  return props.children;
-}
+  return children; // If user is authenticated, show the child routes (Dashboard, etc.)
+};
+
 export default ProtectedWrapper;
