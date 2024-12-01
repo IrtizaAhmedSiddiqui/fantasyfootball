@@ -12,6 +12,7 @@ import Teams from "./pages/Teams";
 import Managers from "./pages/Managers";
 import "./index.css";
 import Fantasy from "./pages/Fantasy";
+import Matches from "./pages/Matches";
 
 const App = () => {
   const [user, setUser] = useState(null); // Change to null initially
@@ -79,6 +80,7 @@ const App = () => {
             <Route path="/teams" element={<Teams />} />
             <Route path="/managers" element={<Managers />} />
             <Route path="/fantasy" element={<Fantasy />} />
+            <Route path="/matches" element={<Matches />} />
           </Route>
           <Route path="*" element={<NoPageFound />} />
         </Routes>

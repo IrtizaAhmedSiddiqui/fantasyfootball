@@ -11,30 +11,6 @@ const db = mysql.createConnection({
   database: "project",
 });
 
-// Get all fantasy teams and their players
-// router.get("/", (req, res) => {
-//   const q = `
-//     SELECT f.user_id, f.team_name, p.name
-//     FROM fantasy f
-//     JOIN players p ON f.player_id1 = p.player_id
-//     OR f.player_id2 = p.player_id
-//     OR f.player_id3 = p.player_id
-//     OR f.player_id4 = p.player_id
-//     OR f.player_id5 = p.player_id
-//     OR f.player_id6 = p.player_id
-//     OR f.player_id7 = p.player_id
-//     OR f.player_id8 = p.player_id
-//     OR f.player_id9 = p.player_id
-//     OR f.player_id10 = p.player_id
-//     OR f.player_id11 = p.player_id
-//     ORDER BY f.user_id, f.team_name`;
-
-//   db.query(q, (err, data) => {
-//     if (err) return res.json(err);
-//     return res.json(data);
-//   });
-// });
-
 router.get("/team-details/:user_id", (req, res) => {
   const { user_id } = req.params;
 
@@ -264,8 +240,8 @@ router.put("/update-team", (req, res) => {
   });
 });
 
-router.post("/resolve-matches", (req, res) => {
-  const { gameweek } = req.body;
+router.post("/resolve-matches/:gameweek", (req, res) => {
+  const gameweek = req.params.gameweek;
 
   // Start a transaction
   db.beginTransaction((err) => {
@@ -420,12 +396,105 @@ router.post("/reset-season", (req, res) => {
               });
             }
 
+            // Send the initial success response
             res.send({ success: true, message: "Season reset successfully." });
+
+            // Delay calling the stored procedure
+            setTimeout(() => {
+              // Get the total number of teams
+              db.query(
+                "SELECT COUNT(*) AS total_teams FROM fantasy_teams",
+                (err, result) => {
+                  if (err) {
+                    console.error("Error fetching team count:", err);
+                    return;
+                  }
+
+                  const totalTeams = result[0].total_teams;
+
+                  // Call the stored procedure with the total number of teams
+                  db.query("CALL generate_matches(?)", [totalTeams], (err) => {
+                    if (err) {
+                      console.error(
+                        "Error calling generate_matches procedure:",
+                        err
+                      );
+                    } else {
+                      console.log("Matches generated successfully.");
+                    }
+                  });
+                }
+              );
+            }, 3000); // 3-second delay
           });
         }
       );
     });
   });
+});
+
+router.get("/get-gameweeks", (req, res) => {
+  // Query to fetch all distinct gameweeks
+  db.query(
+    "SELECT DISTINCT gameweek FROM fantasy_matches ORDER BY gameweek ASC",
+    (err, results) => {
+      if (err) {
+        console.error("Database error:", err); // Log the error for debugging
+        return res.status(500).send({ error: "Failed to fetch gameweeks." });
+      }
+
+      // Check if results contain data
+      if (!results || results.length === 0) {
+        return res.status(404).send({ error: "No gameweeks found." });
+      }
+
+      // Send the gameweeks data back to the frontend
+      res.send({ gameweeks: results });
+    }
+  );
+});
+
+router.get("/matches/:gameweek", (req, res) => {
+  const { gameweek } = req.params;
+
+  // Query to fetch matches for the given gameweek
+  db.query(
+    `SELECT 
+    fm.match_id,
+    fm.team1_user_id,
+    team1.team_name AS team1_name,
+    fm.team2_user_id,
+    team2.team_name AS team2_name,
+    fm.winner_user_id,
+    winner.team_name AS winner_name
+  FROM 
+    fantasy_matches fm
+  LEFT JOIN 
+    fantasy_teams team1 ON fm.team1_user_id = team1.user_id
+  LEFT JOIN 
+    fantasy_teams team2 ON fm.team2_user_id = team2.user_id
+  LEFT JOIN 
+    fantasy_teams winner ON fm.winner_user_id = winner.user_id
+  WHERE 
+    fm.gameweek = ?`,
+    [gameweek],
+    (err, results) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).send({ error: "Failed to fetch matches." });
+      }
+
+      // Check if results contain data
+      if (!results || results.length === 0) {
+        return res
+          .status(404)
+          .send({ error: "No matches found for this gameweek." });
+      }
+
+      // Send the matches data back to the frontend
+      res.send({ matches: results });
+    }
+  );
 });
 
 export default router;

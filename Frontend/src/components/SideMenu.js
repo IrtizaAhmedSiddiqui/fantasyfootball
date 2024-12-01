@@ -10,7 +10,7 @@ function SideMenu() {
         <nav aria-label="Main Nav" className="mt-6 flex flex-col space-y-1">
           <Link
             to="/"
-            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+            className="flex items-center gap-2 rounded-lg hover:bg-green-100 px-4 py-2 text-gray-700"
           >
             <img
               alt="dashboard-icon"
@@ -21,7 +21,7 @@ function SideMenu() {
 
           <Link
             to="/players"
-            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+            className="flex items-center gap-2 rounded-lg hover:bg-green-100 px-4 py-2 text-gray-700"
           >
             <img alt="players-icon" src={require("../assets/users.png")} />
             <span className="text-sm font-medium"> Players </span>
@@ -29,7 +29,7 @@ function SideMenu() {
 
           <Link
             to="/teams"
-            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+            className="flex items-center gap-2 rounded-lg hover:bg-green-100 px-4 py-2 text-gray-700"
           >
             <img alt="players-icon" src={require("../assets/users.png")} />
             <span className="text-sm font-medium"> Teams </span>
@@ -37,7 +37,7 @@ function SideMenu() {
 
           <Link
             to="/managers"
-            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+            className="flex items-center gap-2 rounded-lg hover:bg-green-100 px-4 py-2 text-gray-700"
           >
             <img alt="players-icon" src={require("../assets/users.png")} />
             <span className="text-sm font-medium"> Managers </span>
@@ -45,10 +45,18 @@ function SideMenu() {
 
           <Link
             to="/fantasy"
-            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
+            className="flex items-center gap-2 rounded-lg hover:bg-green-100 px-4 py-2 text-gray-700"
           >
             <img alt="players-icon" src={require("../assets/users.png")} />
             <span className="text-sm font-medium"> Fantasy </span>
+          </Link>
+
+          <Link
+            to="/matches"
+            className="flex items-center gap-2 rounded-lg hover:bg-green-100 px-4 py-2 text-gray-700"
+          >
+            <img alt="matches-icon" src={require("../assets/users.png")} />
+            <span className="text-sm font-medium">Matches</span>
           </Link>
         </nav>
       </div>

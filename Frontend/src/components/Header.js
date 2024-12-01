@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <>
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-green-800">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -44,7 +44,7 @@ export default function Header() {
                       <div className="flex justify-center items-center gap-2">
                         <img
                           className="h-8 w-8"
-                          src={require("../assets/logo.png")}
+                          src={require("../assets/football.png")}
                           alt="Inventory Management System"
                         />
                         <span className="font-bold text-white italic">
@@ -59,7 +59,7 @@ export default function Header() {
                       <Menu as="div" className="relative ml-3"></Menu>
                       <Menu as="div" className="relative ml-3">
                         <div>
-                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-green-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

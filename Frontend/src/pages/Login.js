@@ -65,14 +65,18 @@ function Login() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 h-screen items-center place-items-center">
-      <div className="flex justify-center">
-        <img src={require("../assets/signup.jpg")} alt="Sign In" />
+      <div className="flex justify-center items-center w-full h-screen">
+        <img
+          src={require("../assets/poster3.jpg")}
+          alt="Sign In"
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="w-full max-w-md space-y-8 p-10 rounded-lg">
         <div>
           <img
             className="mx-auto h-12 w-auto"
-            src={require("../assets/logo.png")}
+            src={require("../assets/football.png")}
             alt="Your Company"
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
